@@ -35,54 +35,6 @@
         </div>
       </nav>
 </header>
-<main>
-  <div class="container my-4">
-    <h3 id="titulo">Movimientos</h3>
-    <div id="alertas"></div>
-
-    <div class="row text-center mb-3">
-      <div class="col">Ingresos: <strong id="total-ingresos">$0.00</strong></div>
-      <div class="col">Gastos: <strong id="total-gastos">$0.00</strong></div>
-      <div class="col">Saldo actual: <strong id="saldo-actual">$0.00</strong></div>
-    </div>
-
-    <form id="form-movimiento" class="row g-2 mb-4">
-      <input type="hidden" name="idMovimiento">
-      <div class="col-md-2"><input class="form-control" name="fecha" type="date"></div>
-      <div class="col-md-2">
-        <select class="form-select" name="tipo">
-          <option value="INGRESO">Ingreso</option>
-          <option value="GASTO">Gasto</option>
-        </select>
-      </div>
-      <div class="col-md-2"><input class="form-control" name="categoria" placeholder="Categoría"></div>
-      <div class="col-md-2"><input class="form-control" name="monto" type="number" step="0.01" placeholder="Monto"></div>
-      <div class="col-md-2"><input class="form-control" name="descripcion" placeholder="Descripción"></div>
-      <div class="col-md-2"><button class="btn btn-success w-100">Guardar</button></div>
-    </form>
-
-    <form id="form-filtros" class="row g-2 mb-3">
-      <div class="col-md-3">
-        <select class="form-select" name="tipo">
-          <option value="">Todos los tipos</option>
-          <option value="INGRESO">Ingreso</option>
-          <option value="GASTO">Gasto</option>
-        </select>
-      </div>
-      <div class="col-md-3"><input class="form-control" name="categoria" placeholder="Filtrar categoría"></div>
-      <div class="col-md-3"><input class="form-control" name="desde" type="date"></div>
-      <div class="col-md-3"><input class="form-control" name="hasta" type="date"></div>
-    </form>
-
-    <table class="table table-striped">
-      <thead><tr><th>Fecha</th><th>Tipo</th><th>Categoría</th><th>Monto</th><th>Descripción</th><th>Acciones</th></tr></thead>
-      <tbody id="tabla-movimientos"></tbody>
-    </table>
-  </div>
-</main>
-
-  
-
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script type="module" src="js/controllers/movimientosController.js"></script>
 </body>
