@@ -1,55 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Control de Gastos Personales</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-B/GM4XqrwHnWXNOWMbloTmrYXZg10cakYGmpfsR/bbzQ6JAJI4ihuyADKLnBgrCe" crossorigin="anonymous">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Movimientos</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="bg-light">
-    <header>
-        <nav class="navbar md:navbar-expand bg-1">
-            <div class="container-fluid">
-              <a class="navbar-brand" href="#">Navbar</a>
-              <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#navbarDrawer" aria-controls="navbarDrawer" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon" aria-hidden="true"></span>
-              </button>
-              <dialog class="drawer drawer-end" tabindex="-1" id="navbarDrawer" aria-labelledby="navbarDrawerLabel">
-                <div class="drawer-header">
-                  <h5 class="drawer-title" id="navbarDrawerLabel">Menu</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
-                </div>
-                <div class="drawer-body mb-2 md:mb-0">
-                  <ul class="nav navbar-nav me-auto">
-                    <li class="nav-item">
-                      <a class="nav-link active" aria-current="page" href="/index.html">Usuarios</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/pages/cuentas.html">Cuentas</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Movimientos</a>
-                    </li>
-                  </ul>
-                </div>
-              </dialog>
+  <header>
+    <nav class="navbar md:navbar-expand bg-1">
+        <div class="container-fluid">
+          <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#navbarDrawer" aria-controls="navbarDrawer" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon" aria-hidden="true"></span>
+          </button>
+          <dialog class="drawer drawer-end" tabindex="-1" id="navbarDrawer" aria-labelledby="navbarDrawerLabel">
+            <div class="drawer-header">
+              <h5 class="drawer-title" id="navbarDrawerLabel">Menu</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
             </div>
-          </nav>
-    </header>
-    <main class="container py-5">
-        <section class="text-center mb-5">
-            <h1 class="fw-bold">Sistema de Control de Gastos Personales</h1>
-            <h3 class="fw-semibold"></h3>
-        </section>
-        <section class="card shadow-sm mb-4">
-            <div class="card-header bg-success text-white">
-                <h2 class="h5 mb-0">Registrar</h2>
+            <div class="drawer-body mb-2 md:mb-0">
+              <ul class="nav navbar-nav me-auto">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="#">Usuarios</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/pages/cuentas.html">Cuentas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/pages/movimientos.html">Movimientos</a>
+                </li>
+              </ul>
             </div>
-        </section>
-        <section class="card shadow-sm mb-4">
-            <div class="card-header bg-success text-white"></div>
-        </section>
-    </main>
-    <script type="module" src="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-1a/pXj49ZQ1aHEmrJ+gMw1otqoVsYwlEnlD8mIfY2TV03r20Y0CN7uqx1tQogjPL" crossorigin="anonymous"></script>
+          </dialog>
+        </div>
+      </nav>
+</header>
+<main>
+  <div class="container my-4">
+    <h3 id="titulo">Movimientos</h3>
+    <div id="alertas"></div>
+
+    <div class="row text-center mb-3">
+      <div class="col">Ingresos: <strong id="total-ingresos">$0.00</strong></div>
+      <div class="col">Gastos: <strong id="total-gastos">$0.00</strong></div>
+      <div class="col">Saldo actual: <strong id="saldo-actual">$0.00</strong></div>
+    </div>
+
+    <form id="form-movimiento" class="row g-2 mb-4">
+      <input type="hidden" name="idMovimiento">
+      <div class="col-md-2"><input class="form-control" name="fecha" type="date"></div>
+      <div class="col-md-2">
+        <select class="form-select" name="tipo">
+          <option value="INGRESO">Ingreso</option>
+          <option value="GASTO">Gasto</option>
+        </select>
+      </div>
+      <div class="col-md-2"><input class="form-control" name="categoria" placeholder="Categoría"></div>
+      <div class="col-md-2"><input class="form-control" name="monto" type="number" step="0.01" placeholder="Monto"></div>
+      <div class="col-md-2"><input class="form-control" name="descripcion" placeholder="Descripción"></div>
+      <div class="col-md-2"><button class="btn btn-success w-100">Guardar</button></div>
+    </form>
+
+    <form id="form-filtros" class="row g-2 mb-3">
+      <div class="col-md-3">
+        <select class="form-select" name="tipo">
+          <option value="">Todos los tipos</option>
+          <option value="INGRESO">Ingreso</option>
+          <option value="GASTO">Gasto</option>
+        </select>
+      </div>
+      <div class="col-md-3"><input class="form-control" name="categoria" placeholder="Filtrar categoría"></div>
+      <div class="col-md-3"><input class="form-control" name="desde" type="date"></div>
+      <div class="col-md-3"><input class="form-control" name="hasta" type="date"></div>
+    </form>
+
+    <table class="table table-striped">
+      <thead><tr><th>Fecha</th><th>Tipo</th><th>Categoría</th><th>Monto</th><th>Descripción</th><th>Acciones</th></tr></thead>
+      <tbody id="tabla-movimientos"></tbody>
+    </table>
+  </div>
+</main>
+
+  
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script type="module" src="js/controllers/movimientosController.js"></script>
 </body>
 </html>
